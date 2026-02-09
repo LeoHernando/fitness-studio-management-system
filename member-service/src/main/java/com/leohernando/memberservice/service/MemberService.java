@@ -1,5 +1,6 @@
 package com.leohernando.memberservice.service;
 
+import com.leohernando.memberservice.dto.MemberRequestDTO;
 import com.leohernando.memberservice.dto.MemberResponseDTO;
 import com.leohernando.memberservice.mapper.MemberMapper;
 import com.leohernando.memberservice.model.Member;
@@ -19,9 +20,13 @@ public class MemberService {
 
     public List<MemberResponseDTO> getMembers() {
         List<Member> members = memberRepository.findAll();
-        List<MemberResponseDTO> memberResponseDTOs = members.stream().map(
-                MemberMapper::toDTO).toList();
 
-        return memberResponseDTOs;
+        return members.stream().map(
+                MemberMapper::toDTO).toList();
+    }
+
+    public MemberResponseDTO createMember(MemberRequestDTO memberRequestDTO) {
+        Member newMember = memberRepository.save(MemberMapper.toModel(memberRequestDTO));
+        return MemberMapper.toDTO(newMember);
     }
 }
