@@ -1,52 +1,27 @@
-package com.leohernando.memberservice.model;
+package com.leohernando.memberservice.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-public class Member {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @NotNull
+public class MemberResponseDTO {
+    private String id;
     private String firstName;
-
-    @NotNull
     private String lastName;
-
-    @NotNull
-    @Email
-    @Column(unique = true)
     private String email;
-
-    @NotNull
     private String phoneNumber;
-
-    @NotNull
     private String address;
-
-    @NotNull
-    private LocalDate dateOfBirth;
-
-    @NotNull
+    private String dateOfBirth;
     private String status;
 
-    @NotNull
-    private LocalDate membershipStartDate;
-
-    private LocalDate membershipEndDate;
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,10 +39,6 @@ public class Member {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
     }
 
     public String getEmail() {
@@ -94,11 +65,11 @@ public class Member {
         this.address = address;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -109,22 +80,5 @@ public class Member {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public LocalDate getMembershipStartDate() {
-        return membershipStartDate;
-    }
-
-    public void setMembershipStartDate(LocalDate membershipStartDate) {
-        this.membershipStartDate = membershipStartDate;
-    }
-
-    public LocalDate getMembershipEndDate() {
-        return membershipEndDate;
-    }
-
-    public void setMembershipEndDate(LocalDate membershipEndDate) {
-        this.membershipEndDate = membershipEndDate;
-    }
-
 
 }

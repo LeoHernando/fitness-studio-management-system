@@ -1,6 +1,6 @@
-# Gym Booking Microservices System
+# Fitness Studio Management System
 
-A production-ready Spring Boot microservices-based gym class booking and member management system. This project demonstrates modern microservices architecture patterns including service discovery, API gateway, gRPC inter-service communication, event-driven messaging with Kafka, and cloud deployment on AWS.
+A production-ready Spring Boot microservices-based fitness class booking and member management system. This project demonstrates modern microservices architecture patterns including service discovery, API gateway, gRPC inter-service communication, event-driven messaging with Kafka, and cloud deployment on AWS.
 
 ## 🏗️ System Architecture
 
@@ -174,8 +174,8 @@ A production-ready Spring Boot microservices-based gym class booking and member 
 - **Java 17** or higher
 - **Maven 3.6+**
 - **Docker & Docker Compose**
-- **PostgreSQL** (or use Docker)
-- **Node.js 16+** (for frontend, if applicable)
+- **PostgreSQL**
+
 
 
 
