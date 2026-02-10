@@ -44,4 +44,11 @@ public class MemberController {
 
         return ResponseEntity.ok(memberResponseDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMember(@PathVariable UUID id) {
+        memberService.deleteMember(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

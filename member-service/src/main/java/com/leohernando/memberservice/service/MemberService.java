@@ -8,6 +8,7 @@ import com.leohernando.memberservice.mapper.MemberMapper;
 import com.leohernando.memberservice.model.Member;
 import com.leohernando.memberservice.repository.MemberRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -60,5 +61,9 @@ public class MemberService {
 
         Member updatedMember = memberRepository.save(member);
         return MemberMapper.toDTO(updatedMember);
+    }
+
+    public void deleteMember(UUID id) {
+        memberRepository.deleteById(id);
     }
 }
