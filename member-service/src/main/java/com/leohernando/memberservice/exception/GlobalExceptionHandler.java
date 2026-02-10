@@ -29,4 +29,13 @@ public class GlobalExceptionHandler {
         errors.put("message", "Email address already exists");
         return ResponseEntity.badRequest().body(errors);
     }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleMemberNotFoundException(MemberNotFoundException ex) {
+
+        log.warn("Member not found {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", "Member not found");
+        return ResponseEntity.badRequest().body(errors);
+    }
 }

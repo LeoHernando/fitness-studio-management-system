@@ -1,9 +1,11 @@
 package com.leohernando.memberservice.dto;
 
+import com.leohernando.memberservice.dto.validators.CreateMemberValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.lang.Nullable;
 
 public class MemberRequestDTO {
     @NotBlank(message = "First name is required")
@@ -28,11 +30,14 @@ public class MemberRequestDTO {
     @NotBlank(message = "Date of birth is required")
     private String dateOfBirth;
 
-    @NotBlank(message = "Membership start date is required")
+    @NotBlank(groups = CreateMemberValidationGroup.class, message = "Membership start date is required")
     private String membershipStartDate;
 
     @NotBlank(message = "Membership status is required")
     private String status;
+
+    @Nullable
+    private String membershipEndDate;
 
     public String getFirstName() {
         return firstName;
@@ -98,6 +103,13 @@ public class MemberRequestDTO {
         this.status = status;
     }
 
+    @Nullable
+    public String getMembershipEndDate() {
+        return membershipEndDate;
+    }
 
+    public void setMembershipEndDate(@Nullable String membershipEndDate) {
+        this.membershipEndDate = membershipEndDate;
+    }
 
 }

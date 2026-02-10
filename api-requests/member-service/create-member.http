@@ -1,12 +1,12 @@
-### GET request to example server
+### Creates a new member entity
 POST http://localhost:4000/members
 Content-Type: application/json
 
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "test@example.com",
+  "firstName": "Wei Jie",
+  "lastName": "Lee",
+  "email": "weijie@example.com",
   "phoneNumber": "96734627",
   "address": "123 Orchard Road",
   "dateOfBirth": "2000-07-26",
