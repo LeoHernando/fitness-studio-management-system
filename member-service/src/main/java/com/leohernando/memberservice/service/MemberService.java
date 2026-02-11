@@ -4,6 +4,7 @@ import com.leohernando.memberservice.dto.MemberRequestDTO;
 import com.leohernando.memberservice.dto.MemberResponseDTO;
 import com.leohernando.memberservice.exception.EmailAlreadyExistsException;
 import com.leohernando.memberservice.exception.MemberNotFoundException;
+import com.leohernando.memberservice.grpc.BillingServiceGrpcClient;
 import com.leohernando.memberservice.mapper.MemberMapper;
 import com.leohernando.memberservice.model.Member;
 import com.leohernando.memberservice.repository.MemberRepository;
@@ -17,9 +18,11 @@ import java.util.UUID;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final BillingServiceGrpcClient billingServiceGrpcClient;
 
-    public MemberService(MemberRepository memberRepository) {
+    public MemberService(MemberRepository memberRepository, BillingServiceGrpcClient billingServiceGrpcClient) {
         this.memberRepository = memberRepository;
+        this.billingServiceGrpcClient = billingServiceGrpcClient;
     }
 
     public List<MemberResponseDTO> getMembers() {
@@ -33,6 +36,10 @@ public class MemberService {
             throw new EmailAlreadyExistsException("A member with this email " + "already exists" + memberRequestDTO.getEmail());
         }
         Member newMember = memberRepository.save(MemberMapper.toModel(memberRequestDTO));
+
+        billingServiceGrpcClient.createBillingAccount(newMember.getId().toString(),
+                newMember.getFullName(), newMember.getEmail());
+
         return MemberMapper.toDTO(newMember);
     }
 
@@ -40,7 +47,7 @@ public class MemberService {
                                           MemberRequestDTO memberRequestDTO) {
 
         Member member = memberRepository.findById(id).orElseThrow(
-                () -> new MemberNotFoundException("Patient not found with ID: " + id));
+                () -> new MemberNotFoundException("Member not found with ID: " + id));
 
         if (memberRepository.existsByEmailAndIdNot(memberRequestDTO.getEmail(), id)) {
             throw new EmailAlreadyExistsException(
